@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <style></style>
+</head>
+
+<body>
+    <div class='main-page'>
+        <div class='side-bar' style='flex-basis: 23%;'>
+            <h2 style='color: white'><span class='mif-organization'></span> Chat App</h2>
+            <div id='room-info'>
+            
+            </div>
+        </div>
+        <div class='main-content' style='flex-basis: 82%;'>
+            <div class='form-group'>
+                <form id="message-form" style='flex-basis: 79%;'>
+                    <input name="message" placeholder="Message" style='flex-basis: 79%;' autocomplete="off"
+                        data-role="taginput">
+                    <button class="button primary" style='flex-basis: 19%; height: 50px'><span
+                            class="mif-paper-plane mif-lg"></span> Send</button>
+                </form>
+                <button class="button success" id="send-location" style='flex-basis: 19%; height: 50px'><span
+                        class="mif-location mif-lg"></span> Send location</button>
+            </div>
+
+            <div id='messages'></div>
+        </div>
+    </div>
+
+    <script id='location-template' type='text/html'>
+        <div>
+            <p class='sender-name'>{{username}} <span class='timestamp'>{{createdAt}}</span></p>
+            <p class='message'><a href="{{url}}" target="_blank">My current location</a></p>
+        </div>
+    </script>
+    <script id='message-template' type='text/html'>
+        <div>
+            <p class='sender-name'>{{username}} <span class='timestamp'>{{createdAt}}</span></p>
+            <p class='message'>{{message}}</p>
+        </div>
+    </script>
+    <script id='room-info-template' type='text/html'>
+        <p class='room-name'>Room: {{room}}</p>
+        <p>Users list</p>
+        <div>
+            <ul>
+                {{#users}}
+                <li>{{username}}</li>
+                {{/users}}
+            </ul>
+        </div>
+    </script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
+
+</html>
